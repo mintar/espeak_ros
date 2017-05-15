@@ -5,6 +5,9 @@ else
     INSTALL_PACKAGES=$1
 fi
 
+# your ROS distribution
+DISTRO=kinetic
+
 # create list of packages to install
 packagelist=(
     espeak
@@ -17,7 +20,7 @@ if [ $INSTALL_PACKAGES != false ]; then
 fi
 
 ### install further repositories
-rosinstall .. /opt/ros/kinetic repository.rosinstall
+rosinstall .. /opt/ros/${DISTRO} repository.rosinstall
 
 ### install dependencies of the previously cloned repositories
 dependent_repositories=$(grep -r "local-name:" repository.rosinstall  | cut -d":" -f 2 | sed -r 's/\s+//g')
